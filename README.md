@@ -77,9 +77,7 @@ The project is built using Django, PostgreSQL, Tailwind CSS, and Cloudinary for 
 - Git
 - GitHub
 
-### Deployment
 
-- Render
 
 ---
 
