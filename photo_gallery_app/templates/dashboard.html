@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Heading -->
+    <div class="mb-5">
+
+        <h1 class="fw-bold">
+            Welcome{% if user.is_authenticated %}, {{ user.email }}{% endif %}
+        </h1>
+
+        <p class="text-muted">
+            Browse beautiful photographs shared by the community.
+        </p>
+
+    </div>
+
+    <!-- Search + Filter -->
+    <div class="row mb-4">
+
+        <div class="col-md-8 mb-3">
+
+            <div class="input-group">
+
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search photos...">
+
+                <button class="btn btn-dark">
+                    Search
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <select class="form-select">
+
+                <option selected>Filter by Tag</option>
+
+                <option>Nature</option>
+                <option>Travel</option>
+                <option>Animals</option>
+                <option>Food</option>
+                <option>Art</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- Gallery -->
+
+    <div class="row g-4">
+
+        <!-- Card 1 -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card shadow-sm h-100">
+
+                <img
+                    src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600"
+                    class="card-img-top"
+                    alt="Photo">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        Mountain View
+                    </h5>
+
+                    <p class="card-text text-muted">
+                        A peaceful mountain landscape.
+                    </p>
+
+                    <div class="mb-3">
+
+                        <span class="badge bg-primary">
+                            Nature
+                        </span>
+
+                        <span class="badge bg-success">
+                            Travel
+                        </span>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <button
+                            class="btn btn-outline-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#photoModal">
+
+                            View Details
+
+                        </button>
+
+                        <div>
+
+                            <button class="btn btn-outline-success btn-sm">
+                                👍
+                            </button>
+
+                            <button class="btn btn-outline-danger btn-sm">
+                                👎
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Card 2 -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card shadow-sm h-100">
+
+                <img
+                    src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=600"
+                    class="card-img-top"
+                    alt="Photo">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        Curious Cat
+                    </h5>
+
+                    <p class="card-text text-muted">
+                        An adorable cat enjoying the sunshine.
+                    </p>
+
+                    <span class="badge bg-warning text-dark">
+                        Animals
+                    </span>
+
+                    <div class="mt-3">
+
+                        <button
+                            class="btn btn-outline-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#photoModal">
+
+                            View Details
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Card 3 -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card shadow-sm h-100">
+
+                <img
+                    src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600"
+                    class="card-img-top"
+                    alt="Photo">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        Morning Coffee
+                    </h5>
+
+                    <p class="card-text text-muted">
+                        Freshly brewed coffee.
+                    </p>
+
+                    <span class="badge bg-secondary">
+                        Food
+                    </span>
+
+                    <div class="mt-3">
+
+                        <button
+                            class="btn btn-outline-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#photoModal">
+
+                            View Details
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- PHOTO DETAILS MODAL -->
+<!-- ========================= -->
+
+<div
+    class="modal fade"
+    id="photoModal"
+    tabindex="-1"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h4 class="modal-title">
+                    Mountain View
+                </h4>
+
+                <button
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-md-7">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200"
+                            class="img-fluid rounded"
+                            alt="Photo">
+
+                    </div>
+
+                    <div class="col-md-5">
+
+                        <h5>Description</h5>
+
+                        <p>
+
+                            A peaceful mountain landscape captured during sunset.
+
+                        </p>
+
+                        <hr>
+
+                        <h6>Uploaded By</h6>
+
+                        <p>Sarah</p>
+
+                        <h6>Tags</h6>
+
+                        <span class="badge bg-primary">
+                            Nature
+                        </span>
+
+                        <span class="badge bg-success">
+                            Travel
+                        </span>
+
+                        <span class="badge bg-dark">
+                            Mountains
+                        </span>
+
+                        <hr>
+
+                        <div class="d-flex gap-2">
+
+                            <button class="btn btn-success">
+
+                                👍 Like
+
+                            </button>
+
+                            <button class="btn btn-danger">
+
+                                👎 Dislike
+
+                            </button>
+
+                        </div>
+
+                        <hr>
+
+                        <small class="text-muted">
+
+                            Uploaded July 12, 2026
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Close
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
