@@ -4,62 +4,111 @@
 
 {% block content %}
 
+{% extends "base.html" %}
+
+{% load socialaccount %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
 <div class="container py-5">
 
     <div class="row justify-content-center">
 
         <div class="col-lg-5 col-md-7">
 
-            <div class="card shadow border-0">
+            <div class="card shadow-lg border-0 rounded-4">
 
                 <div class="card-body p-5">
 
-                    <h2 class="text-center mb-2">Create Account</h2>
+                    <h2 class="text-center fw-bold mb-2">
+                        Create Account
+                    </h2>
 
                     <p class="text-center text-muted mb-4">
-                        Join the Photo Gallery
+                        Join the Photo Gallery Community
                     </p>
 
                     <!-- Google Registration -->
-                    {% load socialaccount %}
                     <div class="d-grid mb-4">
                         <a href="{% provider_login_url 'google' %}" class="btn btn-outline-danger">
-                            <i class="bi bi-google"></i>
+                            <i class="bi bi-google me-2"></i>
                             Continue with Google
                         </a>
                     </div>
 
-                    <div class="text-center text-muted mb-4">
-                        <small>or register with your email</small>
+                    <div class="d-flex align-items-center mb-4">
+                        <hr class="flex-grow-1">
+                        <span class="px-3 text-muted">OR</span>
+                        <hr class="flex-grow-1">
                     </div>
 
-                    {% if form.errors %}
-                    <div class="alert alert-danger">
-                        Please correct the errors below.
-                    </div>
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
                     {% endif %}
 
                     <form method="POST" action="{% url 'register' %}">
 
                         {% csrf_token %}
 
+                        <!-- Email -->
+
                         <div class="mb-3">
-                            <label class="form-label">Email Address</label>
+
+                            {{ form.email.label_tag }}
+
                             {{ form.email }}
-                            {{ form.email.errors }}
+
+                            {% if form.email.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.email.errors }}
+                                </div>
+                            {% endif %}
+
                         </div>
 
+                        <!-- Password -->
+
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
+
+                            {{ form.password1.label_tag }}
+
                             {{ form.password1 }}
-                            {{ form.password1.errors }}
+
+                            {% if form.password1.help_text %}
+                                <div class="form-text">
+                                    {{ form.password1.help_text|safe }}
+                                </div>
+                            {% endif %}
+
+                            {% if form.password1.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.password1.errors }}
+                                </div>
+                            {% endif %}
+
                         </div>
 
+                        <!-- Confirm Password -->
+
                         <div class="mb-3">
-                            <label class="form-label">Confirm Password</label>
+
+                            {{ form.password2.label_tag }}
+
                             {{ form.password2 }}
-                            {{ form.password2.errors }}
+
+                            {% if form.password2.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.password2.errors }}
+                                </div>
+                            {% endif %}
+
                         </div>
+
+                        <!-- Terms -->
 
                         <div class="form-check mb-4">
 
@@ -70,19 +119,17 @@
                                 required>
 
                             <label class="form-check-label" for="terms">
-
                                 I agree to the Terms and Conditions
-
                             </label>
 
                         </div>
 
+                        <!-- Submit -->
+
                         <div class="d-grid">
 
                             <button type="submit" class="btn btn-success btn-lg">
-
                                 Create Account
-
                             </button>
 
                         </div>
@@ -95,7 +142,7 @@
 
                         Already have an account?
 
-                        <a href="{% url 'login' %}" class="text-decoration-none fw-semibold">
+                        <a href="{% url 'login' %}" class="fw-semibold text-decoration-none">
                             Login
                         </a>
 
@@ -110,5 +157,7 @@
     </div>
 
 </div>
+
+{% endblock %}
 
 {% endblock %}
