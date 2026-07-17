@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import CustomUser
+from django.contrib.auth.models import User
+from .models import *
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -29,8 +30,8 @@ class CustomUserCreationForm(UserCreationForm):
     )
 
     class Meta:
-        model = CustomUser
-        fields = ("email",)
+        model = User
+        fields = ( "username","email")
 
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
@@ -48,3 +49,49 @@ class CustomAuthenticationForm(AuthenticationForm):
             "placeholder": "Enter your password"
         })
     )
+
+class ProfileUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = [
+            "bio",
+            "profile_picture",
+        ]
+
+        widgets = {
+            "bio": forms.Textarea(attrs={
+                "class": "form-control",
+                "rows": 4,
+                "placeholder": "Tell us about yourself..."
+            }),
+        }
+
+
+class PhotoUploadForm(forms.ModelForm):
+
+    class Meta:
+        model = Photo
+        fields = [
+            "title",
+            "description",
+            "image",
+            "tags",
+        ]
+
+        widgets = {
+            "title": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Photo title"
+            }),
+
+            "description": forms.Textarea(attrs={
+                "class": "form-control",
+                "rows": 4,
+                "placeholder": "Write a description..."
+            }),
+
+            "tags": forms.SelectMultiple(attrs={
+                "class": "form-select"
+            }),
+        }

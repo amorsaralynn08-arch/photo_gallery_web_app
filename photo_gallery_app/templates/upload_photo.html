@@ -20,11 +20,14 @@
 
                 </div>
 
+
                 <div class="card-body">
+
 
                     <form method="POST" enctype="multipart/form-data">
 
                         {% csrf_token %}
+
 
                         <div class="mb-3">
 
@@ -34,10 +37,13 @@
 
                             <input
                                 type="text"
+                                name="title"
                                 class="form-control"
                                 placeholder="Enter photo title">
 
                         </div>
+
+
 
                         <div class="mb-3">
 
@@ -46,11 +52,15 @@
                             </label>
 
                             <textarea
+                                name="description"
                                 class="form-control"
                                 rows="5"
                                 placeholder="Tell us about your photo..."></textarea>
 
                         </div>
+
+
+
 
                         <div class="mb-3">
 
@@ -58,18 +68,39 @@
                                 Tags
                             </label>
 
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Nature, Travel, Food...">
+
+                            <select
+                                name="tags"
+                                class="form-select"
+                                multiple>
+
+
+                                {% for tag in form.fields.tags.queryset %}
+
+                                <option value="{{ tag.id }}">
+
+                                    {{ tag.name }}
+
+                                </option>
+
+
+                                {% endfor %}
+
+
+                            </select>
+
 
                             <div class="form-text">
 
-                                Separate tags using commas.
+                                Hold CTRL/CMD to select multiple tags.
 
                             </div>
 
+
                         </div>
+
+
+
 
                         <div class="mb-4">
 
@@ -77,13 +108,21 @@
                                 Select Image
                             </label>
 
+
                             <input
                                 type="file"
-                                class="form-control">
+                                name="image"
+                                class="form-control"
+                                accept="image/*">
+
 
                         </div>
 
+
+
+
                         <div class="d-grid">
+
 
                             <button
                                 class="btn btn-success btn-lg"
@@ -93,18 +132,26 @@
 
                             </button>
 
+
                         </div>
+
 
                     </form>
 
+
                 </div>
+
 
             </div>
 
+
         </div>
+
 
     </div>
 
+
 </div>
+
 
 {% endblock %}

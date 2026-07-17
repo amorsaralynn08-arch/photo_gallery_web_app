@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ photo.title }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container py-5">
+
+
+    <div class="card shadow">
+
+
+        <img
+            src="{{ photo.image.url }}"
+            class="card-img-top"
+            style="max-height:600px; object-fit:cover;">
+
+
+        <div class="card-body">
+
+
+            <h2>
+                {{ photo.title }}
+            </h2>
+
+
+            <p class="text-muted">
+                {{ photo.description }}
+            </p>
+
+
+            <hr>
+
+
+            <p>
+                Uploaded by:
+                <strong>
+                    {{ photo.user.username }}
+                </strong>
+            </p>
+
+
+            <div>
+
+                {% for tag in photo.tags.all %}
+
+                <span class="badge bg-primary">
+                    {{ tag.name }}
+                </span>
+
+                {% endfor %}
+
+            </div>
+
+
+            <hr>
+
+
+            <p>
+                 Likes: {{ photo.total_likes }}
+            </p>
+
+            <p>
+                Dislikes: {{ photo.total_dislikes }}
+            </p>
+
+
+            <a href="{% url 'index' %}"
+               class="btn btn-secondary">
+
+                Back
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
